@@ -44,7 +44,7 @@ function cubedPlusTwo(x,y,z) {
   if (x === undefined || y === undefined || z === undefined){
     return 'Preencha todos os valores corretamente!'
   } else {
-    return x*y*z + 2;
+    return (x * y * z) + 2;
   }
 }
 
@@ -77,7 +77,7 @@ function sumAndDivide (a,b,c) {
   } else if (c === undefined){
     return a + b;
   } else if (arguments.length === 3){
-    return a+b/c;
+    return (a + b) / c;
   } else {
     return null;
   }
@@ -86,7 +86,7 @@ function sumAndDivide (a,b,c) {
 // Invoque a função acima utilizando todas as possibilidades (com nenhum argumento, com um, com dois e com três.) Coloque um comentário de linha ao lado da função com o resultado de cada invocação.
 sumAndDivide(1); //1
 sumAndDivide(1,2); //3
-sumAndDivide(2,2,2);  //3
+sumAndDivide(2,2,2);  //2
 sumAndDivide(); //false
 sumAndDivide(1,2,3,4); //null
 ```
