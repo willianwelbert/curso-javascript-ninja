@@ -8,18 +8,15 @@ equivalente booleano para o valor passado no argumento for `true`, ou `false`
 para o contrário.
 */
 var isTruthy = function(param) {
-  if(param) {
-    return `true`
-  } else {
-    return `false`
-  }
-}
+  return !!param
+}; // sempre que atribuir um valor a uma variável, termine com ponto e vírgula
 
 // Invoque a função criada acima, passando todos os tipos de valores `falsy`.
 isTruthy(0);
 isTruthy('');
 isTruthy("");
 isTruthy(null);
+isTruthy(false);
 isTruthy(undefined);
 isTruthy(NaN);
 isTruthy(-0);
@@ -59,7 +56,7 @@ var carro = {
   quantasPortas: 4,
   assentos: 5,
   quantidadedePessoas: 0
-}
+};
 
 /*
 Crie um método chamado `mudarCor` que mude a cor do carro conforme a cor
@@ -72,24 +69,24 @@ carro.mudarCor = function(newColor) {
 /*
 Crie um método chamado `obterCor`, que retorne a cor do carro.
 */
-carro.obterCor = function() {return carro.cor}
+carro.obterCor = function() {return carro.cor;};
 
 /*
 Crie um método chamado `obterModelo` que retorne o modelo do carro.
 */
-carro.obterModelo = function() {return carro.modelo}
+carro.obterModelo = function() {return carro.modelo;};
 
 /*
 Crie um método chamado `obterMarca` que retorne a marca do carro.
 */
-carro.obterMarca = function() {return carro.marca}
+carro.obterMarca = function() {return carro.marca;};
 
 /*
 Crie um método chamado `obterMarcaModelo`, que retorne:
 "Esse carro é um [MARCA] [MODELO]"
 Para retornar os valores de marca e modelo, utilize os métodos criados.
 */
-carro.obterMarcaModelo = function() {return "Esse carro é um " + carro.obterMarca() + " " + carro.obterModelo()}
+carro.obterMarcaModelo = function() {return "Esse carro é um " + carro.obterMarca() + " " + carro.obterModelo();};
 
 /*
 Crie um método que irá adicionar pessoas no carro. Esse método terá as
@@ -109,10 +106,8 @@ citado acima, no lugar de "pessoas".
 */
 carro.adicionaPassageiros = function(pessoasEntrando) {
   var assentosLivres = carro.assentos - carro.quantidadedePessoas;
-  var pluralPessoas = 'pessoas';
-  var pluralCabem = 'cabem';
-  if(assentosLivres === 1){pluralPessoas = 'pessoa' }
-  if(assentosLivres === 1){pluralCabem = 'cabe' }
+  var pluralPessoas = assentosLivres === 1 ? 'pessoa' : 'pessoas';
+  var pluralCabem = assentosLivres === 1 ? 'cabe' :  'cabem';
 
   if (assentosLivres === 0 ) {
     return "O carro já está lotado!"
@@ -120,9 +115,9 @@ carro.adicionaPassageiros = function(pessoasEntrando) {
     return `Só ${pluralCabem} mais ${assentosLivres} ${pluralPessoas}!`
   } else{
     carro.quantidadedePessoas += pessoasEntrando;
-    return "Já temos " + carro.quantidadedePessoas + " pessoas no carro!"
+    return `Já temos ${carro.quantidadedePessoas} pessoas no carro!`
   }
-}
+};
 
 /*
 Agora vamos verificar algumas informações do carro. Para as respostas abaixo,
