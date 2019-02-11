@@ -35,11 +35,11 @@ const cincoTipos = ["string", 99, true, 1.3, function() {}];
 Invoque a função criada acima, fazendo-a retornar todos os valores do último
 array criado.
 */
-getArrayThrougIndex(cincoTipos, 0);
-getArrayThrougIndex(cincoTipos, 1);
-getArrayThrougIndex(cincoTipos, 2);
-getArrayThrougIndex(cincoTipos, 3);
-getArrayThrougIndex(cincoTipos, 4);
+getArrayThrougIndex(cincoTipos, 0); // "string"
+getArrayThrougIndex(cincoTipos, 1); // 99
+getArrayThrougIndex(cincoTipos, 2); // true
+getArrayThrougIndex(cincoTipos, 3); // 1.3
+getArrayThrougIndex(cincoTipos, 4); // function () {}
 
 /*
 Crie uma função chamada `book`, que recebe um parâmetro, que será o nome do
@@ -57,15 +57,24 @@ os livros.
 */
 function book(name) {
   var library = {
-    carrie: {
-      nome: "Carrie, a estranha",
+    "Carrie, a estranha": {
       quantidadePaginas: 200,
+      autor: "Stephen King",
+      editora: "Intrínseca"
+    },
+    IT: {
+      quantidadePaginas: 900,
+      autor: "Stephen King",
+      editora: "Intrínseca"
+    },
+    "A Incendiária": {
+      quantidadePaginas: 320,
       autor: "Stephen King",
       editora: "Intrínseca"
     }
   };
 
-  return name !== undefined ? library[name] : library;
+  return !name ? library : library[name];
 }
 
 /*
@@ -77,21 +86,16 @@ Ainda com a função acima, imprima a quantidade de páginas de um livro qualque
 usando a frase:
 "O livro [NOME_DO_LIVRO] tem [X] páginas!"
 */
+var bookName = "IT";
 console.log(
-  "O livro " +
-    book("carrie").nome +
-    " tem " +
-    book("carrie").quantidadePaginas +
-    " páginas"
+  `O livro ${bookName} tem ${book(bookName).quantidadePaginas} páginas`
 );
 /*
 Ainda com a função acima, imprima o nome do autor de um livro qualquer, usando
 a frase:
 "O autor do livro [NOME_DO_LIVRO] é [AUTOR]."
 */
-console.log(
-  "o autor do livro " + book("carrie").nome + " é " + book("carrie").autor
-);
+console.log(`O autor do livro ${bookName} é ${book(bookName).autor}`);
 
 /*
 Ainda com a função acima, imprima o nome da editora de um livro qualquer, usando
@@ -99,8 +103,5 @@ a frase:
 "O livro [NOME_DO_LIVRO] foi publicado pela editora [NOME_DA_EDITORA]."
 */
 console.log(
-  "O livro " +
-    book("carrie").nome +
-    " foi publicado pela editora " +
-    book("carrie").editora
+  `O livro ${bookName} foi publicado pela editora ${book(bookName).editora}`
 );
