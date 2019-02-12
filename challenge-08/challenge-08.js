@@ -12,7 +12,9 @@ Invoque a função criada acima, passando dois números que serão somados, e mo
 o resultado no console, com a frase:
 "A soma de [VALOR 1] e [VALOR2] é igual a [RESULTADO]."
 */
-console.log(`A soma de 2 e 4 é ${sum(2, 4)}`);
+var a = 8;
+var b = 12;
+console.log(`A soma de ${a} e ${b} é ${sum(a, b)}`);
 
 /*
 Mostre no console o nome da função criada acima, com a frase:
