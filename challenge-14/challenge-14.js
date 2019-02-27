@@ -54,7 +54,7 @@ Mostre o resultado no console.
 */
   console.log("\nOperation:");
   var operation = justMod2Or3.reduce(function(acc, value) {
-    return (acc += 1) * value;
+    return (acc + 1) * value;
   }, 0);
 
   console.log(operation);
@@ -66,7 +66,7 @@ console.
 */
   console.log("\nOperation 2:");
   var operation2 = justMod2Or3.reduceRight(function(acc, value) {
-    return (acc += 1) * value;
+    return (acc + 1) * value;
   }, 0);
   console.log(operation2);
 
@@ -109,8 +109,9 @@ Consegue prever o resultado? Deixe uma mensagem no console tentando explicar
 o que acontece ;)
 */
   console.log("\nExiste um { number: 2 } em numberObjects?");
+  var obj2 = numberObjects[1];
   console.log(
-    numberObjects.indexOf({ number: 2 }) !== -1
+    numberObjects.indexOf(obj2) > -1
       ? "Existe um objeto { number: 2 } em numberObjects!"
       : "Não existe um objeto { number: 2 } em numberObjects :("
   );
@@ -123,7 +124,7 @@ será que obtemos um resultado diferente? Faça a busca a partir do índice 2.
     "\nE buscando a partir do último índice, o { number: 2 } existe?"
   );
   console.log(
-    numberObjects.indexOf({ number: 2 }, 2) !== -1
+    numberObjects.lastIndexOf(obj2, 2) > -1
       ? "Existe um objeto { number: 2 } em numberObjects!"
       : "Não existe um objeto { number: 2 } em numberObjects :("
   );
