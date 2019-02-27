@@ -44,7 +44,7 @@ Adicione 3 novos estados da região Norte no início do array e mostre no consol
 Remova o primeiro estado do array `brasil` e mostre-o no console.
 */
   console.log("\nEstado removido:");
-  console.log(brasil.shift(1));
+  console.log(brasil.shift());
 
   /*
 Crie um novo array chamado `newSul`, que receba somente os estados do sul,
@@ -163,12 +163,11 @@ objeto desse array, e adicione a frase abaixo na propriedade `estado`:
 - "[ESTADO] pertence ao Brasil."
 Atribua o novo array a uma variável chamada `map`.
 */
-  var map = [];
-  newBrasil.map(function(value) {
-    map.push({
+  var map = newBrasil.map(function(value) {
+    return {
       id: ++value.id,
       estado: (value.estado += " pertence ao Brasil")
-    });
+    };
   });
 
   /*
@@ -182,9 +181,7 @@ Filtre o array criado acima, retornando somente os estados que tiverem
 ID par. Atribua o valor à uma variável chamada `filter`.
 */
   var filter = map.filter(function(value) {
-    if (value.id % 2 === 0) {
-      return value;
-    }
+    return value.id % 2 === 0;
   });
 
   /*
