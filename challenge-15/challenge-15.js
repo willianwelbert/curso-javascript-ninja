@@ -33,7 +33,8 @@ as seguintes características:
       return this.age;
     };
     this.addAge = function() {
-      this.age = this.age + arguments[0];
+      this.age += arguments[0];
+      return this;
     };
   }
 
@@ -74,10 +75,18 @@ cada um. A frase deverá ser no formato:
 - "[NOME COMPLETO] agora tem [NOVA IDADE] anos."
 */
   console.log("\nNova idade das pessoas:");
-  willian.addAge(3);
-  douglas.addAge(8);
-  ze.addAge(-3);
-  console.log(willian.getFullName(), "agora tem", willian.getAge(), "anos");
-  console.log(douglas.getFullName(), "agora tem", douglas.getAge(), "anos");
-  console.log(ze.getFullName(), "agora tem", ze.getAge(), "anos");
+
+  console.log(
+    willian.getFullName(),
+    "agora tem",
+    willian.addAge(3).getAge(),
+    "anos"
+  );
+  console.log(
+    douglas.getFullName(),
+    "agora tem",
+    douglas.addAge(8).getAge(),
+    "anos"
+  );
+  console.log(ze.getFullName(), "agora tem", ze.addAge(-3).getAge(), "anos");
 })();
