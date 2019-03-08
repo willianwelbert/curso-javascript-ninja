@@ -37,20 +37,14 @@ console.log para cada formato.
   console.log("\nNome convertido à partir de um slug:");
   var fullName = "willian-welbert";
   console.log("nome em slug", fullName);
+  var separetedName = fullName
+    .split("-")
+    .map(function(name) {
+      return name[0].toUpperCase() + name.slice(1);
+    })
+    .join(" ");
 
-  function clearName(slugedname) {
-    var separetedName = slugedname.split("-");
-    var clearName = [];
-    for (var i = 0; i < separetedName.length; i++) {
-      clearName.push(
-        separetedName[i][0].toUpperCase(),
-        separetedName[i].slice(1),
-        " "
-      );
-    }
-    return clearName.join("");
-  }
-  console.log("nome limpo", clearName(fullName));
+  console.log("nome limpo", separetedName);
 
   /*
 - Crie um array com 5 nomes. Reduza esses nomes a uma única string, separando
@@ -63,16 +57,14 @@ O resultado final deve ficar mais ou menos assim:
 */
   console.log("\nMeus amigos:");
   var friends = ["Alexandre", "Marcos", "Artur", "Thaiane", "Roger"];
-  var stringfriends = friends.join(", ");
-  var lastFriend = stringfriends.substring(stringfriends.lastIndexOf(","));
-  var lastFriendCorrect = stringfriends
-    .substring(stringfriends.lastIndexOf(","))
-    .replace(",", " e");
+  var phrase = friends
+    .reduce(function(acc, current, index) {
+      var separator = friends.length - 1 === index ? " e " : ", ";
+      return acc + separator + current;
+    })
+    .concat(" são meus amigos");
 
-  console.log(
-    stringfriends.replace(lastFriend, lastFriendCorrect),
-    "são meus amigos"
-  );
+  console.log(phrase);
 
   /*
 Usando o replace(), faça a string "Roberto" virar "Roberta".
@@ -86,8 +78,7 @@ Mostre no console a parte "nando" da string "Fernando". Use o método que
 faz a busca do final para o início da string.
 */
   console.log("\nParte de uma string:");
-  var nando = "Fernando".lastIndexOf("nando");
-  console.log("Fernando".slice(nando));
+  console.log("Fernando".substring(8, 3));
 
   /*
 Declare uma variável chamada `myName`, que receba o seu primeiro nome,
