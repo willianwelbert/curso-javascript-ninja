@@ -1,3 +1,5 @@
+(function(){
+'use strict'
 /*
 1. Envolva todo o conteúdo desse desafio em uma IIFE.
 2. Adicione a diretiva 'use strict';
@@ -15,7 +17,14 @@ eles! Use um console.log para cada CPF.
 - "101.123-131x32"
 */
 console.log( 'Limpando CPFs:' );
-// ?
+function cleanCPF(cpf){
+  return cpf.replace(/\D/g, '');
+}
+
+console.log(cleanCPF('049-214 3421-1'));
+console.log(cleanCPF('210.458.522-05'));
+console.log(cleanCPF('735 500 794 - 22'));
+console.log(cleanCPF('101.123-131x32'));
 
 /*
 Usando os CPFs limpos acima, deixe-os com a formatação correta de CPF.
@@ -23,7 +32,18 @@ Ex.: "999.999.999-99"
 Mostre o resultado no console.
 */
 console.log( '\nFormatando CPFs corretamente:' );
-// ?
+function formattedCpf(cpf){
+  var regex = /(\d{3})(\d{3})(\d{3})(\d{2})/g;
+  return cpf.replace(regex, function(match, group1, group2, group3, group4){
+    return `${group1}.${group2}.${group3}-${group4}`;
+  })
+}
+
+console.log(formattedCpf('04921434211'));
+console.log(formattedCpf('21045852205'));
+console.log(formattedCpf('73550079422'));
+console.log(formattedCpf('10112313132'));
+
 
 /*
 Crie uma expressão regular que faça match com as palavras "junho" ou "julho",
@@ -37,7 +57,9 @@ O resultado deve ser:
 ["junho", "julho"]
 */
 console.log( '\nMatch com as palavras "junho" ou "julho" para a frase "Os meses de janeiro, junho e julho começam com a letra j.":' );
-// ?
+console.log(
+  "Os meses de janeiro, junho e julho começam com a letra j.".match(/j\w{3}o/g)
+)
 
 /*
 Crie uma expressão regular que faça o match com a abertura de uma tag
@@ -87,3 +109,5 @@ corretas, para depois aplicar no código ;)
 */
 console.log( '\nFazer replace dos textos das tags:' );
 // ?
+
+})();
