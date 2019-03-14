@@ -1,12 +1,12 @@
-(function(){
-'use strict'
-/*
+(function() {
+  "use strict";
+  /*
 1. Envolva todo o conteúdo desse desafio em uma IIFE.
 2. Adicione a diretiva 'use strict';
 3. Crie um arquivo index.html e adicione esse script à ele.
 */
 
-/*
+  /*
 Crie uma função chamada `cleanCPF`, que receba um CPF por parâmetro, e
 retorne esse CPF limpo (somente os números).
 Usando os CPFs abaixo, mostre no console que a limpeza funciona para todos
@@ -16,36 +16,35 @@ eles! Use um console.log para cada CPF.
 - "735 500 794 - 22"
 - "101.123-131x32"
 */
-console.log( 'Limpando CPFs:' );
-function cleanCPF(cpf){
-  return cpf.replace(/\D/g, '');
-}
+  console.log("Limpando CPFs:");
+  function cleanCPF(cpf) {
+    return cpf.replace(/\D/g, "");
+  }
 
-console.log(cleanCPF('049-214 3421-1'));
-console.log(cleanCPF('210.458.522-05'));
-console.log(cleanCPF('735 500 794 - 22'));
-console.log(cleanCPF('101.123-131x32'));
+  console.log(cleanCPF("049-214 3421-1"));
+  console.log(cleanCPF("210.458.522-05"));
+  console.log(cleanCPF("735 500 794 - 22"));
+  console.log(cleanCPF("101.123-131x32"));
 
-/*
+  /*
 Usando os CPFs limpos acima, deixe-os com a formatação correta de CPF.
 Ex.: "999.999.999-99"
 Mostre o resultado no console.
 */
-console.log( '\nFormatando CPFs corretamente:' );
-function formattedCpf(cpf){
-  var regex = /(\d{3})(\d{3})(\d{3})(\d{2})/g;
-  return cpf.replace(regex, function(match, group1, group2, group3, group4){
-    return `${group1}.${group2}.${group3}-${group4}`;
-  })
-}
+  console.log("\nFormatando CPFs corretamente:");
+  function formattedCpf(cpf) {
+    var regex = /(\d{3})(\d{3})(\d{3})(\d{2})/g;
+    return cpf.replace(regex, function(match, group1, group2, group3, group4) {
+      return `${group1}.${group2}.${group3}-${group4}`;
+    });
+  }
 
-console.log(formattedCpf('04921434211'));
-console.log(formattedCpf('21045852205'));
-console.log(formattedCpf('73550079422'));
-console.log(formattedCpf('10112313132'));
+  console.log(formattedCpf("04921434211"));
+  console.log(formattedCpf("21045852205"));
+  console.log(formattedCpf("73550079422"));
+  console.log(formattedCpf("10112313132"));
 
-
-/*
+  /*
 Crie uma expressão regular que faça match com as palavras "junho" ou "julho",
 usando o mínimo de caracteres possíveis na regex.
 Para garantir que a regex funciona, teste-a usando o método match. Se houver
@@ -56,12 +55,16 @@ Mostre no console o resultado do match para a frase:
 O resultado deve ser:
 ["junho", "julho"]
 */
-console.log( '\nMatch com as palavras "junho" ou "julho" para a frase "Os meses de janeiro, junho e julho começam com a letra j.":' );
-console.log(
-  "Os meses de janeiro, junho e julho começam com a letra j.".match(/j\w{3}o/g)
-)
+  console.log(
+    '\nMatch com as palavras "junho" ou "julho" para a frase "Os meses de janeiro, junho e julho começam com a letra j.":'
+  );
+  console.log(
+    "Os meses de janeiro, junho e julho começam com a letra j.".match(
+      /j\w{3}o/g
+    )
+  );
 
-/*
+  /*
 Crie uma expressão regular que faça o match com a abertura de uma tag
 HTML qualquer.
 Ex.: "<div>", "<section>", "<blockquote>".
@@ -70,10 +73,14 @@ Use o método match e faça o teste com a marcação abaixo:
 O resultado deve ser:
 ["<div>", "<section>", "<blockquote>"]
 */
-console.log( '\nMatch com a abertura de uma tag HTML:' );
-// ?
+  console.log("\nMatch com a abertura de uma tag HTML:");
+  console.log(
+    "<div><section><blockquote>Texto <img /></blockquote></section></div>".match(
+      /<\w+>/g
+    )
+  );
 
-/*
+  /*
 Crie uma expressão regular que faça o match com uma tag HTML vazia, casando
 com a abertura e fechamento da tag.
 Ex.: "<div></div>", "<section></section>", "<blockquote></blockquote>".
@@ -82,10 +89,14 @@ Use o método match e faça o teste com a marcação abaixo:
 O resultado deve ser:
 ["<li></li>", "<li></li>", "<span></span>"]
 */
-console.log( '\nMatch com tags HTML vazias (abertura e fechamento da tag):' );
-// ?
+  console.log("\nMatch com tags HTML vazias (abertura e fechamento da tag):");
+  console.log(
+    "<div><ul><li></li><li></li><li><span></span></li></ul></div>".match(
+      /<(\w+)><\/\w+>/g
+    )
+  );
 
-/*
+  /*
 Vamos complicar um pouco agora :D
 
 Crie uma expressão regular que faça o match com um texto existente dentro de
@@ -107,7 +118,27 @@ Uma dica: faça o match aos poucos. Para facilitar o teste, use o site
 https://regex101.com/#javascript e verifique se as capturas estão
 corretas, para depois aplicar no código ;)
 */
-console.log( '\nFazer replace dos textos das tags:' );
-// ?
+  console.log("\nFazer replace dos textos das tags:");
+  var text =
+    "<h1>Título da página</h1><p>Este é um parágrafo</p><footer>Rodapé</footer>";
+  var regex = /(<\w+>)([\S\s]+)(<\/\w+>)(<\w+>)([\S\s]+)(<\/\S>)(<\w+>)(\S+)(\/\w+>)/g;
 
+  console.log(
+    text.replace(regex, function(
+      fullMatch,
+      group1,
+      group2,
+      group3,
+      group4,
+      group5,
+      group6,
+      group7,
+      group8,
+      group9
+    ) {
+      return `${group1}O texto dentro da tag "h1" é "${group2}"${group3}
+      \n ${group4}O texto dentro da tag "h1" é "${group5}"${group6}
+      \n ${group7}O texto dentro da tag "h1" é "${group8}"${group9}`;
+    })
+  );
 })();
