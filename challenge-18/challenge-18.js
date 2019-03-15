@@ -21,10 +21,15 @@ eles! Use um console.log para cada CPF.
     return cpf.replace(/\D/g, "");
   }
 
-  console.log(cleanCPF("049-214 3421-1"));
-  console.log(cleanCPF("210.458.522-05"));
-  console.log(cleanCPF("735 500 794 - 22"));
-  console.log(cleanCPF("101.123-131x32"));
+  var cpfs = [
+    "049-214 3421-1",
+    "210.458.522-05",
+    "735 500 794 - 22",
+    "101.123-131x32"
+  ];
+
+  var cleanCPFs = cpfs.map(value => cleanCPF(value));
+  console.log(cleanCPFs);
 
   /*
 Usando os CPFs limpos acima, deixe-os com a formatação correta de CPF.
@@ -34,15 +39,11 @@ Mostre o resultado no console.
   console.log("\nFormatando CPFs corretamente:");
   function formattedCpf(cpf) {
     var regex = /(\d{3})(\d{3})(\d{3})(\d{2})/g;
-    return cpf.replace(regex, function(match, group1, group2, group3, group4) {
-      return `${group1}.${group2}.${group3}-${group4}`;
-    });
+    return cpf.replace(regex, "$1.$2.$3-$4");
   }
 
-  console.log(formattedCpf("04921434211"));
-  console.log(formattedCpf("21045852205"));
-  console.log(formattedCpf("73550079422"));
-  console.log(formattedCpf("10112313132"));
+  var formattedCPFs = cleanCPFs.map(value => formattedCpf(value));
+  console.log(formattedCPFs);
 
   /*
 Crie uma expressão regular que faça match com as palavras "junho" ou "julho",
@@ -121,24 +122,9 @@ corretas, para depois aplicar no código ;)
   console.log("\nFazer replace dos textos das tags:");
   var text =
     "<h1>Título da página</h1><p>Este é um parágrafo</p><footer>Rodapé</footer>";
-  var regex = /(<\w+>)([\S\s]+)(<\/\w+>)(<\w+>)([\S\s]+)(<\/\S>)(<\w+>)(\S+)(\/\w+>)/g;
+  var regex = /<(\w+)>([^<]+)<\/\w+>/g;
 
   console.log(
-    text.replace(regex, function(
-      fullMatch,
-      group1,
-      group2,
-      group3,
-      group4,
-      group5,
-      group6,
-      group7,
-      group8,
-      group9
-    ) {
-      return `${group1}O texto dentro da tag "h1" é "${group2}"${group3}
-      \n ${group4}O texto dentro da tag "h1" é "${group5}"${group6}
-      \n ${group7}O texto dentro da tag "h1" é "${group8}"${group9}`;
-    })
+    text.replace(regex, '<$1>O texto dentro da tag "$1" é "$2"</$1> \n')
   );
 })();
