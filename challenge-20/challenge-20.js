@@ -28,12 +28,12 @@
     - Selecione o input de "Nome", atribuindo-o à uma variável chamada
     `$inputUsername`.
     */
-  var $inputUsername = doc.querySelector('[type="text"]');
+  var $inputUsername = doc.querySelector('input[type="text"]');
   /*
     - Selecione o input de "Email", atribuindo-o à uma variável chamada
     `$inputEmail`.
     */
-  var $inputEmail = doc.querySelector('[type="email"]');
+  var $inputEmail = doc.querySelector('input[type="email"]');
   /*
     - Selecione o campo de "Mensagem", atribuindo-o à uma variável chamada
     `$message`.
@@ -49,6 +49,7 @@
     entrados pelo usuário.
     */
   $inputUsername.value = username;
+  $inputEmail.value = email;
   /*
     Adicione um listener de evento de click ao botão que faça o seguinte:
     1. Verificar se todos os campos estão preenchidos:
@@ -76,26 +77,19 @@
   $button.addEventListener(
     "click",
     function() {
-      if (!$inputUsername) alert("Preencha o nome do usuário!");
-      if (!$inputEmail) alert("Preencha o e-mail!");
-      if (!$message) alert("Preencha a mensagem!");
-      if (!isValidEmail($inputEmail)) alert("Entre com um e-mail válido!");
+      if (!$inputUsername) return alert("Preencha o nome do usuário!");
+      if (!$inputEmail) return alert("Preencha o e-mail!");
+      if (isValidEmail($inputEmail.value))
+        return alert("Entre com um e-mail válido!");
+      if (!$message.value) return alert("Preencha a mensagem!");
 
-      if (confirm("Tem certeza que deseja enviar o formulário?")) {
-        alert("Enviado com sucesso!");
-      } else {
-        alert("Não enviado.");
-      }
+      if (!confirm("Tem certeza que deseja enviar o formulário?"))
+        return alert("Não enviado.");
+
+      return alert("Enviado com sucesso!");
     },
     false
   );
-
-  function isValidEmail(email) {
-    var regex = /[(\w)+.]+@\w+\.\w{2,}(\.\w{0,2})?/gm;
-    return regex.test(email);
-  }
-
-  console.log(isValidEmail("rita-marica@titica.a.b"));
 
   /*
     Crie uma função chamada `isValidEmail`, que será usada na validação do
@@ -123,5 +117,9 @@
         - "rita-marica@titica.a.b"
         - "agua_@evida.br.com"
     */
-  // ?
+  function isValidEmail(email) {
+    var regex = /^[\w+.]+@\w+\.\w{2,}(?:\.\w{0,2})?$/gm;
+    console.log(email, "foi avaliado como", regex.test(email));
+    return regex.test(email);
+  }
 })(window, document);
