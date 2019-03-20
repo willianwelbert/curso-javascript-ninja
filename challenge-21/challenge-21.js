@@ -15,29 +15,30 @@ usar o nome que achar melhor, desde que ele seja semântico, ou seja, o nome
 dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
 */
 (function(win, doc) {
-  $cron = doc.querySelector("input");
-  $startButton = doc.querySelector('[data-cron="start"]');
-  $stopButton = doc.querySelector('[data-cron="stop"]');
-  $resetButton = doc.querySelector('[data-cron="reset"]');
+  "use strict";
+  var $cron = doc.querySelector('[data-cron="timer"]');
+  var $startButton = doc.querySelector('[data-cron="start"]');
+  var $stopButton = doc.querySelector('[data-cron="stop"]');
+  var $resetButton = doc.querySelector('[data-cron="reset"]');
 
   var counter = $cron.value;
   var timeoutID;
 
-  $startButton.addEventListener("click", counting, false);
-  $stopButton.addEventListener("click", killCount, false);
+  $startButton.addEventListener("click", startCount, false);
+  $stopButton.addEventListener("click", stopCount, false);
   $resetButton.addEventListener("click", resetCounter, false);
 
-  function counting() {
+  function startCount() {
     $cron.value = counter++;
-    timeoutID = setTimeout(counting, 1000);
+    timeoutID = setTimeout(startCount, 1000);
   }
 
-  function killCount() {
+  function stopCount() {
     clearTimeout(timeoutID);
   }
 
   function resetCounter() {
-    killCount();
+    stopCount();
     counter = 0;
     $cron.value = 0;
   }
