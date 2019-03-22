@@ -1,10 +1,8 @@
-(function() {
+(function(win, doc) {
   "use strict";
   /*
   Vamos desenvolver mais um projeto. A ideia é fazer uma mini-calculadora.
   As regras são:
-
-
 
   - Deve ter somente 1 input, mas não deve ser possível entrar dados nesse input
   diretamente;
@@ -27,4 +25,15 @@
   input;
   - Ao pressionar o botão "CE", o input deve ficar zerado.
   */
-})();
+
+  var buttonZero = doc.querySelector("[data-calc='0']");
+  var buttonOne = doc.querySelector("[data-calc='1']");
+  var buttonTwo = doc.querySelector("[data-calc='2']");
+  var buttonThree = doc.querySelector("[data-calc='3']");
+  var buttonFour = doc.querySelector("[data-calc='4']");
+  var buttonFive = doc.querySelector("[data-calc='5']");
+  var buttonSix = doc.querySelector("[data-calc='6']");
+  var buttonSeven = doc.querySelector("[data-calc='7']");
+  var buttonEight = doc.querySelector("[data-calc='8']");
+  var buttonNine = doc.querySelector("[data-calc='9']");
+})(window, document);
