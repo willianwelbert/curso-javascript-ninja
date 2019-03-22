@@ -5,13 +5,17 @@ body {
 .calc {
   margin: 0 auto;
   width: 15%;
-  border: 1px solid gray;
+  background-color: #dedede;
   padding: 1em;
 }
 
 .buttons {
   width: 85%;
   margin: 0 auto;
+}
+
+.row {
+  margin-top: 0.5em;
 }
 
 button {
@@ -25,6 +29,7 @@ button {
 input {
   width: 100%;
   margin: 0 auto;
+  padding: 0.5em 0;
   margin-bottom: 0.5em;
   font-size: 20px;
   border: none;
