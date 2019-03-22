@@ -4,13 +4,21 @@
   Crie dois objetos, que serão duas pessoas. Cada um deve ter as propriedades
   `name` e `lastName`, preenchidos com o nome e sobrenome da pessoa.
   */
-  var Person = function(name, lastName) {
-    this.name = name;
-    this.lastName = lastName;
+  // var Person = function(name, lastName) {
+  //   this.name = name;
+  //   this.lastName = lastName;
+  // };
+  // VIAJEI na maionese e fiz uma constructor function - era um simples objeto
+
+  var ze = {
+    name: "José",
+    lastName: "Silva"
   };
 
-  var ze = new Person("José", "Silva");
-  var maria = new Person("Maria", "Santos");
+  var maria = {
+    name: "Maria",
+    lastName: "Santos"
+  };
 
   /*
   Agora crie uma função chamada `getFullName` que retorne as propriedades
@@ -24,12 +32,12 @@
   contexto da função. Use um console.log por pessoa.
   */
   console.log("O nome das pessoas é:");
-  Person.prototype.getFullName = function getFullName() {
+  function getFullName() {
     return this.name + " " + this.lastName;
-  };
+  }
 
-  console.log(ze.getFullName());
-  console.log(maria.getFullName());
+  console.log(getFullName.call(ze));
+  console.log(getFullName.call(maria));
 
   /*
   Crie uma função chamada `sum`. Essa função pode receber uma lista de
@@ -41,7 +49,7 @@
   function sum() {
     console.log(arguments);
     return Array.prototype.reduce.call(arguments, function(acc, curr) {
-      return acc + curr;
+      return +acc + +curr;
     });
   }
 
@@ -73,7 +81,7 @@
   */
   console.log("\nFunção que limpa entrada do usuário (somente números):");
   function justNumbers(string) {
-    return string.replace(/\D/g, "").split("");
+    return string.replace(/\D+/g, ",").split(",");
   }
 
   console.log(justNumbers.toString());
@@ -91,5 +99,5 @@
   números desse array e mostre o resultado no console.
   */
   console.log("\nSomar números entrados pelo usuário:");
-  console.log(sum(numbers));
+  console.log(sum.apply(sum, numbers));
 })(window, document);
