@@ -5,6 +5,7 @@ body {
 .calc {
   margin: 0 auto;
   width: 15%;
+  min-width: 305px;
   background-color: #dedede;
   padding: 1em;
 }
