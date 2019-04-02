@@ -1,4 +1,4 @@
-(function(win, doc) {
+( function ( win, doc ) {
   "use strict";
   /*
   Vamos desenvolver mais um projeto. A ideia é fazer uma mini-calculadora.
@@ -27,67 +27,74 @@
   */
 
   //all buttons
-  var $numbers = doc.querySelectorAll(".number");
+  var $numbers = doc.querySelectorAll( ".number" );
 
   //buttons signs
-  var $buttonErase = doc.querySelector("[data-calc='erase']");
-  var $buttonEquals = doc.querySelector("[data-calc='equals']");
-  var $operators = doc.querySelectorAll(".operator");
+  var $buttonErase = doc.querySelector( "[data-calc='erase']" );
+  var $buttonEquals = doc.querySelector( "[data-calc='equals']" );
+  var $operators = doc.querySelectorAll( ".operator" );
   // signs end
 
-  var $display = doc.querySelector("[data-calc='screen']");
+  var $display = doc.querySelector( "[data-calc='screen']" );
 
   var totalNumbers = $numbers.length;
 
-  for (var i = 0; i < totalNumbers; i++) {
-    $numbers[i].addEventListener(
+  for ( var i = 0; i < totalNumbers; i++ ) {
+    $numbers[ i ].addEventListener(
       "click",
-      function() {
-        $display.value += this.getAttribute("data-calc");
+      function () {
+        $display.value += this.getAttribute( "data-calc" );
       },
       false
     );
   }
 
+  function isLastItemAnOperation( item ) {
+    var operations = [ '+', '-', '*', '/' ];
+    var lastItem = item.split( '' ).pop();
+    return operations.some( function ( operator ) {
+      return operator === lastItem;
+    } )
+  }
+
+  function removeLastItemIfItIsAnOperator( number ) {
+    if ( isLastItemAnOperation( number ) ) {
+      return number.slice( 0, -1 );
+    }
+    return number;
+  }
+
   var totalOperators = $operators.length;
 
-  for (var i = 0; i < totalOperators; i++) {
-    $operators[i].addEventListener(
+  for ( var i = 0; i < totalOperators; i++ ) {
+    $operators[ i ].addEventListener(
       "click",
-      function() {
-        var lastInput = $display.value.charAt($display.value.length - 1);
-
-        if (lastInput.match(/[-+*/]/)) {
-          var notLastOperator = $display.value.length - 1;
-          $display.value = $display.value
-            .substring(0, notLastOperator)
-            .concat(this.innerText);
-        } else {
-          $display.value += this.innerText;
-        }
+      function () {
+        $display.value = removeLastItemIfItIsAnOperator( $display.value );
+        $display.value += this.innerText;
       },
       false
     );
   }
 
   var stringToOperator = {
-    "+": function(x, y) {
+    "+": function ( x, y ) {
       return +x + +y;
     },
-    "-": function(x, y) {
+    "-": function ( x, y ) {
       return +x - +y;
     },
-    "*": function(x, y) {
+    "*": function ( x, y ) {
       return +x * +y;
     },
-    "/": function(x, y) {
+    "/": function ( x, y ) {
       return +x / +y;
     }
   };
 
   $buttonErase.addEventListener(
     "click",
-    function() {
+    function () {
       $display.value = "";
     },
     false
@@ -95,16 +102,33 @@
 
   $buttonEquals.addEventListener(
     "click",
-    function() {
+    function () {
+      removeLastItemIfItIsAnOperator( $display.value );
       //calculation logic
-      var valuesArray = $display.value.split(/\D/);
-      console.log(valuesArray);
-      console.log(stringToOperator["+"](valuesArray[0], valuesArray[1]));
-      var operatorsArray = $display.value.split(/\d/g).filter(item => {
-        return item !== "";
-      });
-      console.log(operatorsArray);
+      var allValues = $display.value.match( /\d+[-+*/]?/g );
+      // console.log( allValues );
+      $display.value = allValues.reduce( function ( accumulated, current ) {
+        var firstValue = accumulated.slice( 0, -1 );
+        var operator = accumulated.split( '' ).pop();
+        var lastValue = removeLastItemIfItIsAnOperator( current );
+        var lastOperator = isLastItemAnOperation( current ) ? current
+          .split( '' ).pop() : '';
+        switch ( operator ) {
+          case '+':
+            return ( Number( firstValue ) + Number( lastValue ) ) +
+              lastOperator;
+          case '-':
+            return ( Number( firstValue ) - Number( lastValue ) ) +
+              lastOperator;
+          case '*':
+            return ( Number( firstValue ) * Number( lastValue ) ) +
+              lastOperator;
+          case '/':
+            return ( Number( firstValue ) / Number( lastValue ) ) +
+              lastOperator;
+        }
+      } )
     },
     false
   );
-})(window, document);
+} )( window, document );

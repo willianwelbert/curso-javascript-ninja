@@ -4,53 +4,56 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js">
-  <!--<![endif]-->
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Calculator</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <!--[if lt IE 7]>
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Calculator</title>
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!--[if lt IE 7]>
       <p class="browsehappy">
         You are using an <strong>outdated</strong> browser. Please
         <a href="#">upgrade your browser</a> to improve your experience.
       </p>
     <![endif]-->
-    <div class="calc">
-      <input disabled data-calc="screen" value="" placeholder="0" />
-      <br />
-      <div class="buttons">
-        <div class="row">
-          <button class="number" data-calc="1">1</button>
-          <button class="number" data-calc="2">2</button>
-          <button class="number" data-calc="3">3</button>
-          <button class="operator" data-calc="plus">+</button>
-        </div>
-        <div class="row">
-          <button class="number" data-calc="4">4</button>
-          <button class="number" data-calc="5">5</button>
-          <button class="number" data-calc="6">6</button>
-          <button class="operator" data-calc="minus">-</button>
-        </div>
-        <div class="row">
-          <button class="number" data-calc="7">7</button>
-          <button class="number" data-calc="8">8</button>
-          <button class="number" data-calc="9">9</button>
-          <button class="operator" data-calc="multiply">*</button>
-        </div>
-        <div class="row">
-          <button class="number" data-calc="0">0</button>
-          <button data-calc="erase">CE</button>
-          <button data-calc="equals">=</button>
-          <button class="operator" data-calc="divide">/</button>
-        </div>
+  <div class="calc">
+    <input disabled data-calc="screen" value="" placeholder="0" />
+    <br />
+    <div class="buttons">
+      <div class="row">
+        <button class="number" value="1" data-calc="1">1</button>
+        <button class="number" value='2' data-calc="2">2</button>
+        <button class="number" value='3' data-calc="3">3</button>
+        <button class="operator" data-calc="plus">+</button>
+      </div>
+      <div class="row">
+        <button class="number" value="4" data-calc="4">4</button>
+        <button class="number" value="5" data-calc="5">5</button>
+        <button class="number" value="6" data-calc="6">6</button>
+        <button class="operator" data-calc="minus">-</button>
+      </div>
+      <div class="row">
+        <button class="number" value="7" data-calc="7">7</button>
+        <button class="number" value="8" data-calc="8">8</button>
+        <button class="number" value="9" data-calc="9">9</button>
+        <button class="operator" data-calc="multiply">*</button>
+      </div>
+      <div class="row">
+        <button class="number" value="0" data-calc="0">0</button>
+        <button data-calc="erase">CE</button>
+        <button data-calc="equals">=</button>
+        <button class="operator" data-calc="divide">/</button>
       </div>
     </div>
+  </div>
 
-    <script src="challenge-23.js" async defer></script>
-  </body>
+  <script src="challenge-23.js" async defer></script>
+</body>
+
 </html>
