@@ -22,10 +22,23 @@
   Só passe para o próximo problema quando tiver resolvido o anterior :)
   */
   function DOM( string ) {
-    this.element = string;
+    this.element = document.querySelectorAll( string );
+    var eventFunction;
     this.on = function ( event, callback ) {
-      console.log( event );
+      eventFunction = callback;
+      this.element.forEach( element => {
+        element.addEventListener( event, eventFunction, false )
+      } );
     }
+    this.off = function ( event ) {
+      this.element.forEach( element => {
+        element.removeEventListener( event, eventFunction, false );
+      } );
+    }
+    this.get = function () {
+      return this.element
+    }
+
   }
 
   var $a = new DOM( '[data-js="link"]' );
@@ -33,6 +46,7 @@
     e.preventDefault();
     console.log( 'clicou' );
   } );
+
 
   console.log( 'Elementos selecionados:', $a.get() );
   console.log( '$a é filho de body?', $a.get()[ 0 ].parentNode === document.body );
