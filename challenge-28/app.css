@@ -1,0 +1,44 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: monospace;
+}
+
+:root {
+  --primary-color: #A6F5DD;
+  --secondary-color: #84C2AF;
+  --dark-shade: #2D755F;
+  --error-color: #F6736A;
+  --sucess-color: #28758F;
+}
+
+.container {
+  margin: 0 auto;
+  margin-top: 10%;
+  width: 30%;
+  min-width: 320px;
+  background-color: var(--primary-color);
+  padding: 2em;
+}
+
+
+.input {
+  margin-bottom: 1em;
+}
+
+.results {
+  text-align: left;
+  margin-top: 3em;
+}
+
+.results input {
+  margin-bottom: .5em;
+  border: none;
+  background-color: var(--secondary-color);
+  color: #fff;
+  font-size: 1.3em;
+  padding-left: .4em;
+
+}
