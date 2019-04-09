@@ -1,4 +1,4 @@
-(function() {
+( function ( DOM, doc ) {
   'use strict';
 
   /*
@@ -36,4 +36,39 @@
   que será nomeado de "app".
   */
 
-})();
+  var ajax = new XMLHttpRequest();
+  ajax.open( 'GET', 'company.json', true )
+  ajax.onload = function () {
+    var response = JSON.parse( this.responseText );
+    var companyDataParagraph = doc.createElement( 'p' );
+    var companyDataText = `${response.name} | ${response.phone}`;
+    companyDataParagraph.append( companyDataText );
+    doc.querySelector( '.header' ).appendChild( companyDataParagraph );
+  }
+  ajax.send();
+
+  var $imageURLinput = new DOM( '[data-js="image"]' );
+  var $carModelinput = new DOM( '[data-js="brand-model"]' );
+  var $carYearinput = new DOM( '[data-js="year"]' );
+  var $carPlateinput = new DOM( '[data-js="plate"]' );
+  var $carColorinput = new DOM( '[data-js="color"]' );
+  var $registerButton = new DOM( '[data-js="register"]' );
+
+  var $catalog = new DOM( '.catalog-body' );
+
+  //função makeCatalogCell = para repetir var newImageCell = doc.createElement( 'td' ); -> var imagevalue = $imageURLinput.get()[ 0 ].value;
+
+  $registerButton.on( 'click', function ( e ) {
+    e.preventDefault();
+    console.log( 'cadastro' );
+    var newLine = doc.createElement( 'tr' );
+    var newImageCell = doc.createElement( 'td' );
+    var imagevalue = $imageURLinput.get()[ 0 ].value;
+    newImageCell.append( imagevalue );
+    newLine.append( newImageCell );
+    $catalog.get()[ 0 ].append( newLine );
+
+  } )
+
+
+} )( window.DOM, document );
