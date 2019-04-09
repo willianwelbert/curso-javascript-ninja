@@ -39,10 +39,10 @@
   var $buttonCEP = document.querySelector( '[data-js="CEPButton"]' );
   var $feedback = document.querySelector( '.feedback' );
 
-  var $responseAddress = document.querySelector( '[value="address"]' );
-  var $responseDistrict = document.querySelector( '[value="district"]' );
-  var $responseCity = document.querySelector( '[value="city"]' );
-  var $responseState = document.querySelector( '[value="state"]' );
+  var $responseAddress = document.querySelector( '[data-js="address"]' );
+  var $responseDistrict = document.querySelector( '[data-js="district"]' );
+  var $responseCity = document.querySelector( '[data-js="city"]' );
+  var $responseState = document.querySelector( '[data-js="state"]' );
 
   function cleanCEP( cep ) {
     var onlyNumbers = cep.match( /\d/g );
