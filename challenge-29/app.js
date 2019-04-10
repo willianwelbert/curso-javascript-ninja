@@ -56,16 +56,37 @@
 
   var $catalog = new DOM( '.catalog-body' );
 
-  //função makeCatalogCell = para repetir var newImageCell = doc.createElement( 'td' ); -> var imagevalue = $imageURLinput.get()[ 0 ].value;
+
+  function makeCatalogCell( input ) {
+    var newCell = doc.createElement( 'td' );
+    var cellValue = input.get()[ 0 ].value;
+    var cellText = doc.createTextNode( cellValue );
+    newCell.appendChild( cellText );
+    return newCell
+  }
+
+  var id = 0;
 
   $registerButton.on( 'click', function ( e ) {
     e.preventDefault();
-    console.log( 'cadastro' );
     var newLine = doc.createElement( 'tr' );
-    var newImageCell = doc.createElement( 'td' );
-    var imagevalue = $imageURLinput.get()[ 0 ].value;
-    newImageCell.append( imagevalue );
-    newLine.append( newImageCell );
+
+    function makeIdCell() {
+      ++id;
+      var idCell = doc.createElement( 'td' );
+      var idString = String( id );
+      var idText = doc.createTextNode( idString );
+      return idCell.appendChild( idText );
+    }
+
+    newLine.append(
+      makeIdCell(),
+      makeCatalogCell( $imageURLinput ),
+      makeCatalogCell( $carModelinput ),
+      makeCatalogCell( $carYearinput ),
+      makeCatalogCell( $carPlateinput ),
+      makeCatalogCell( $carColorinput ),
+    );
     $catalog.get()[ 0 ].append( newLine );
 
   } )
