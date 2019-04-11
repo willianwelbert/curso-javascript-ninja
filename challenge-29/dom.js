@@ -2,7 +2,40 @@
   'use strict';
 
   function DOM( elements ) {
-    this.element = document.querySelectorAll( elements )
+    if ( !( this instanceof DOM ) )
+      return new DOM( elements );
+
+    this.element = document.querySelectorAll( elements );
+
+
+  };
+
+  DOM.isArray = function isArray() {
+    return Object.prototype.toString.call( param ) === '[object Array]';
+  };
+
+  DOM.isObject = function isObject() {
+    return Object.prototype.toString.call( param ) === '[object Object]';
+  };
+
+  DOM.isFunction = function isFunction() {
+    return Object.prototype.toString.call( param ) === '[object Function]';
+  };
+
+  DOM.isNumber = function isNumber() {
+    return Object.prototype.toString.call( param ) === '[object Number]';
+  };
+
+  DOM.isString = function isString() {
+    return Object.prototype.toString.call( param ) === '[object String]';
+  };
+
+  DOM.isBoolean = function isBoolean() {
+    return Object.prototype.toString.call( param ) === '[object Boolean]';
+  };
+
+  DOM.isNull = function isNull() {
+    return Object.prototype.toString.call( param ) === '[object Null]';
   };
 
   DOM.prototype.on = function on( eventType, callback ) {
@@ -17,8 +50,10 @@
     } );
   };
 
-  DOM.prototype.get = function get() {
-    return this.element;
+  DOM.prototype.get = function get( index ) {
+    if ( !index )
+      return this.element[ 0 ];
+    return this.element[ index ];
   }
 
   DOM.prototype.forEach = function forEach() {
@@ -47,34 +82,6 @@
 
   DOM.prototype.some = function some() {
     return Array.prototype.some.apply( this.element, arguments );
-  };
-
-  DOM.prototype.isArray = function isArray() {
-    return Object.prototype.toString.call( param ) === '[object Array]';
-  };
-
-  DOM.prototype.isObject = function isObject() {
-    return Object.prototype.toString.call( param ) === '[object Object]';
-  };
-
-  DOM.prototype.isFunction = function isFunction() {
-    return Object.prototype.toString.call( param ) === '[object Function]';
-  };
-
-  DOM.prototype.isNumber = function isNumber() {
-    return Object.prototype.toString.call( param ) === '[object Number]';
-  };
-
-  DOM.prototype.isString = function isString() {
-    return Object.prototype.toString.call( param ) === '[object String]';
-  };
-
-  DOM.prototype.isBoolean = function isBoolean() {
-    return Object.prototype.toString.call( param ) === '[object Boolean]';
-  };
-
-  DOM.prototype.isNull = function isNull() {
-    return Object.prototype.toString.call( param ) === '[object Null]';
   };
 
   win.DOM = DOM;

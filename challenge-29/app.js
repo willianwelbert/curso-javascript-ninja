@@ -1,4 +1,4 @@
-( function ( DOM, doc ) {
+( function ( $, doc ) {
   'use strict';
 
   /*
@@ -36,30 +36,21 @@
   que será nomeado de "app".
   */
 
-  var ajax = new XMLHttpRequest();
-  ajax.open( 'GET', 'company.json', true )
-  ajax.onload = function () {
-    var response = JSON.parse( this.responseText );
-    var companyDataParagraph = doc.createElement( 'p' );
-    var companyDataText = `${response.name} | ${response.phone}`;
-    companyDataParagraph.append( companyDataText );
-    doc.querySelector( '.header' ).appendChild( companyDataParagraph );
-  }
-  ajax.send();
 
-  var $imageURLinput = new DOM( '[data-js="image"]' );
-  var $carModelinput = new DOM( '[data-js="brand-model"]' );
-  var $carYearinput = new DOM( '[data-js="year"]' );
-  var $carPlateinput = new DOM( '[data-js="plate"]' );
-  var $carColorinput = new DOM( '[data-js="color"]' );
-  var $registerButton = new DOM( '[data-js="register"]' );
 
-  var $catalog = new DOM( '.catalog-body' );
+  // var $imageURLinput = $( '[data-js="image"]' ).get();
+  // var $carModelinput = $( '[data-js="brand-model"]' ).get();
+  // var $carYearinput = $( '[data-js="year"]' ).get();
+  // var $carPlateinput = $( '[data-js="plate"]' ).get();
+  // var $carColorinput = $( '[data-js="color"]' ).get();
+  // var $registerButton = $( '[data-js="register"]' ).get();
+
+  var $catalog = $( '.catalog-body' );
 
 
   function makeCatalogCell( input ) {
     var newCell = doc.createElement( 'td' );
-    var cellValue = input.get()[ 0 ].value;
+    var cellValue = input.value;
     var cellText = doc.createTextNode( cellValue );
     newCell.appendChild( cellText );
     return newCell
@@ -67,29 +58,72 @@
 
   var id = 0;
 
-  $registerButton.on( 'click', function ( e ) {
-    e.preventDefault();
-    var newLine = doc.createElement( 'tr' );
 
-    function makeIdCell() {
-      ++id;
-      var idCell = doc.createElement( 'td' );
-      var idString = String( id );
-      var idText = doc.createTextNode( idString );
-      return idCell.appendChild( idText );
+  // $registerButton.on( 'click', function ( e ) {
+  //   e.preventDefault();
+  //   var newLine = doc.createElement( 'tr' );
+
+  //   function makeIdCell() {
+  //     ++id;
+  //     var idCell = doc.createElement( 'td' );
+  //     var idString = String( id );
+  //     var idText = doc.createTextNode( idString );
+  //     return idCell.appendChild( idText );
+  //   }
+
+  //   newLine.append(
+  //     makeIdCell(),
+  //     makeCatalogCell( $imageURLinput ),
+  //     makeCatalogCell( $carModelinput ),
+  //     makeCatalogCell( $carYearinput ),
+  //     makeCatalogCell( $carPlateinput ),
+  //     makeCatalogCell( $carColorinput ),
+  //   );
+  //   $catalog.append( newLine );
+
+  // } )
+
+  function app() {
+    return {
+      init: function init() {
+        console.log( 'app init' );
+        this.companyInfo();
+        this.initEvents();
+      },
+
+      initEvents: function initEvents() {
+        $( '[data-js="form-register"]' ).on( 'submit', this.handleSubmit );
+      },
+
+      handleSubmit: function handleSubmit( e ) {
+        e.preventDefault();
+        console.log( 'submit' );
+      },
+
+      companyInfo: function companyInfo() {
+        var ajax = new XMLHttpRequest();
+        ajax.open( 'GET', 'company.json', true );
+        ajax.send();
+        ajax.addEventListener( 'readystatechange', this.getCompanyInfo, false );
+      },
+
+      getCompanyInfo: function getCompanyInfo() {
+        if ( !app().isReady.call( this ) )
+          return;
+
+        var response = JSON.parse( this.responseText );
+        var companyDataParagraph = doc.createElement( 'p' );
+        var companyDataText = `${response.name} | ${response.phone}`;
+        companyDataParagraph.append( companyDataText );
+        doc.querySelector( '.header' ).appendChild( companyDataParagraph );
+      },
+
+      isReady: function isReady() {
+        return this.readyState === 4 && this.status === 200;
+      }
     }
+  }
 
-    newLine.append(
-      makeIdCell(),
-      makeCatalogCell( $imageURLinput ),
-      makeCatalogCell( $carModelinput ),
-      makeCatalogCell( $carYearinput ),
-      makeCatalogCell( $carPlateinput ),
-      makeCatalogCell( $carColorinput ),
-    );
-    $catalog.get()[ 0 ].append( newLine );
-
-  } )
-
+  app().init();
 
 } )( window.DOM, document );
